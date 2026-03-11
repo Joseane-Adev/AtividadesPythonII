@@ -1,0 +1,25 @@
+compras = []
+
+while True:
+    produto= input('Produto: ')
+    quantidade = int(input('Quantidade do produto: '))
+    preco = float(input('Qual o preço do produto: '))
+
+    compras.append([produto, quantidade, preco])
+
+
+    sair = input('Você já encerrou suas compras? Sim ou Não?')
+    if sair == 'Sim':
+        print('Encerrando venda')
+        break
+    else:
+        print('Continue a comprar!')
+
+soma = 0.0
+
+
+for produtos in compras:
+    print(f'Produto: {produtos[0]} x Quantidade:{produtos[1]} Preço:{produtos[2]:5.2f}')
+    soma += produtos[1] * produtos[2]
+    # pega a posicçao 1 que é quantidade x a posicao 2 que é preço
+print(f'Total : {soma:7.2f}')
