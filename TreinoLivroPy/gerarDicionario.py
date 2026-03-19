@@ -8,4 +8,4 @@ for char in frase:
     else:
         dicionario[char] = 1
 
-print(dicionario)   
+print(dicionario)
