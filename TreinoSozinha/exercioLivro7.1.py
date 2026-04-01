@@ -32,3 +32,51 @@ for letras in set(string):#colocou a string dentro  de um conjunto para não rep
     quantidade = string.count(letras)
     print(f'{letras}: {quantidade}')
 
+#exercicio 7.5
+#ler duas strings , gerar um aterceira, retirar da segunda os caracteres repetidos da primeira
+
+string_Um = 'AATTGGAA'
+string_Dois = 'TG'
+
+string_Tres = []
+for letra in string_Um:
+    if letra not in string_Dois:
+        string_Tres += letra
+
+print(string_Tres)
+
+#exercicio 7.6 
+#leia tres stringd. Imprima o resultado da substituição na primeira, dos caracteres da segunda pelo da terceira
+
+numero1 = 'AATTCGAA'
+numero2 = 'TG'
+numero3 = 'AC'
+
+#criar um dicionario
+resultado = {}
+
+for indice in range(len(numero2)):
+    resultado[numero2[indice]] = numero3[indice]
+
+#substituindo
+numero4 = ''
+for l in numero1:
+    if l in resultado:
+        numero4 += resultado[l]
+    else:
+        numero4 += l
+print(numero4) 
+
+#exercicio 7.7 pedir ao usuario que escreva uma frase e imprima quantas vogais tem
+
+frase = input('Digite uma frase: ')
+vogais = 'aeiou'
+
+contagem = {}
+
+for i in frase.lower():
+
+    if i in vogais:
+        contagem[i] = contagem.get(i, 0) + 1
+
+print('Quantidade de vogais: ', contagem)
