@@ -22,14 +22,15 @@ while numero <= user:
 #Tabuada
 while True: 
 
-    numero = int(input('Qual numero da tabuada você quer fazer: '))
-
-    x = 0 
-    while x <= 10:
-        print(f'{numero} * {x} = {numero * x}')
-        x += 1
     
-    sair = input("Deseja sair? [S]Sim/[N]Não: ").strip().upper()
+
+    numero = int(input('Qual numero da tabuada você quer fazer: '))
+    x = 0
+    while x <=10:
+         print(f'{numero} x {x} = {numero * x}')
+         x += 1
+    
+    sair = input("Deseja sair? [S]Sim/[N]Não: ").strip().upper()#strip remove espaços inicio e fim e upper letras maiuscula
     if sair == 'S':
         print('Você saiu!')
         break
