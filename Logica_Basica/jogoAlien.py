@@ -23,13 +23,10 @@ def menu():
          print('Digite um  numero do menu: ')
 
 def encontra_alien(total_vidas):  
-        vidas = total_vidas 
-        #o jogador começa com 100 vidas
-        numeros = random.randint(1,100)
-        #gera valores entre 1 e 100, para escolher onde está o alien
-        lista_palpites = []
-
-        #conjunto para armazenar os palpites
+        vidas = total_vidas #o jogador começa com 100 vidas
+        numeros = random.randint(1,100) #gera valores entre 1 e 100, para escolher onde está o alien
+        lista_palpites = [] #lista para armazenar os palpites
+        
         while vidas > 0:
             try:
                  palpite = int(input('Digite um numéro que você acha que está o alienígena: '))
@@ -37,6 +34,8 @@ def encontra_alien(total_vidas):
             except ValueError:
                  print('Digite um numero!')
 
+            #Se meu palpite está na lista de palpites, o numero já existe, continue senão
+            #guarda o numero na lista.
             if palpite in lista_palpites:
                     print('Você já digitou esse numero')
                     continue
