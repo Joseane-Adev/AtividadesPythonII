@@ -1,0 +1,40 @@
+conjunto = {x for x in [9,2,1,3,6,9] if x % 3 == 0}
+print(conjunto)
+
+#dictComprehensions
+dicionario = {valor: chave for chave, valor in {'a': 10, 'b': 20}.items()}
+print(dicionario)
+
+#funçao map
+def map_1(funcao, valores):
+    retorno = []
+    for x in valores:
+        retorno.append(funcao(x))
+    return retorno # retorna a lista com valores
+
+#função lambda
+map_2=(lambda x : x / 2, [1,2,3])
+print(map_2)
+
+lista = list(map(lambda x : x/2, [1,2,3]))
+print(lista)
+
+#passando varias listas map
+lista1 = list(map(lambda a, b: (a , b), [1,2,3], [4,5,6]))
+print(lista1)
+
+#zip
+lista2 = list(zip([1,2], [3,4]))
+print(lista2)
+
+map_2 = (lambda x, z: (x, z), [4,5,6], [7,8,9])
+print(map_2)
+
+def map_3(funcao, *valores):
+    for x in zip(*valores):
+        yield funcao(*x)
+
+list(map_3(lambda a, b : (a , b) [1,2], [3,4]))
+#chamada apresenta generator
+#se colocar list apresenta uma lista
+
