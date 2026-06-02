@@ -1,5 +1,5 @@
 #operator walrus
-
+  
 soma = 0.0
 
 while(valor := input('digite fim ou um numero qualquer: '))!='fim':
