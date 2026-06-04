@@ -1,0 +1,4 @@
+; não deve ser impressa
+= 
+> alinhada á direita
+* centralizada

@@ -1,0 +1,5 @@
+Numero par: 0
+Numero par: 2
+Numero par: 4
+Numero par: 6
+Numero par: 8

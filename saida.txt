@@ -1,0 +1,10 @@
+Primeira lista: Impar 1
+Primeira lista: Impar 3
+Primeira lista: Impar 5
+Primeira lista: Impar 7
+Primeira lista: Impar 9
+Segunda lista: Numero par: 0
+Segunda lista: Numero par: 2
+Segunda lista: Numero par: 4
+Segunda lista: Numero par: 6
+Segunda lista: Numero par: 8

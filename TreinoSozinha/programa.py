@@ -1,10 +1,9 @@
 import sys
 
-arquivo = sys.argvs[1]
+# Pega o nome do arquivo passado como argumento
+arquivo_nome = sys.argv[1]
 
-arquivo = open('arquivo', 'r')
-
-for linha in arquivo:
-    print(linha)
-
-arquivo.close()
+# Abre o arquivo em modo leitura
+with open(arquivo_nome, 'r') as arquivo:
+    for linha in arquivo:
+        print(linha, end="")
