@@ -5,12 +5,7 @@ class Televisão():
     
     def muda_canal_baixo(self):
         self.canal -= 1
+        return self.canal
     def muda_canal_cima(self):
         self.canal += 1
-
-tv = Televisão()
-tv.muda_canal_cima()
-print(tv.canal)
-
-tv.muda_canal_baixo()
-print(tv.canal)
+        return self.canal
