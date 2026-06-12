@@ -24,4 +24,25 @@ with open( 'lista_nomes.txt', 'r') as lista_nomes:
         for nome in nomes:
             arquivo.write(nome)
 
+#ler um arquivo e criar um dicionario em que cada chave é uma palavra e cada valor é 
+#o numero de ocorrencias no arquivo
+palavras = ['programação' ,'python' ,'desenvolvedora']
+
+with open('palavras.txt', 'w') as lista_palavras:
+    for palavra in palavras:
+        lista_palavras.write(palavra + '\n')
+   
+
+with open('palavras.txt', 'r') as dicionario:
+    leitura = dicionario.readlines()
+
+contagem= {}
+for linha in leitura:
+    palavra = linha.strip()
+    if palavra in contagem:
+        contagem[palavra] += 1
+    else:
+        contagem[palavra] = 1
+
+print(contagem)
 
