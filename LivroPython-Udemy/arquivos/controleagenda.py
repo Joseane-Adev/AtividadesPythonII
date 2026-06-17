@@ -1,5 +1,5 @@
 agenda = []
-
+alterada = False
 def pede_nome():
     return input('Nome: ')
 
@@ -7,8 +7,8 @@ def pede_telefone():
     return input('Telefone: ')
 
 #para mostrar o que foi escrito em nome e telefone
-def mostra_dados(nome, telefone):
-    print(f'Nome: {nome} | Telefone: {telefone}')
+def mostra_dados(indice, nome, telefone):
+    print(f'Indice: {indice} | Nome: {nome} | Telefone: {telefone}')
 
 
 def pede_nome_arquivo():
@@ -29,9 +29,11 @@ def novo():
     funçao para cadastrar contato novo, onde chamo a funçaõ de pede o nome e pede telefone
     depois pego a lista vazia de agenda e adiciono o nome e telefone
     '''
+    global agenda,alterada
     nome = pede_nome()
     telefone = pede_telefone()
     agenda.append([nome, telefone])
+    alterada = True # foi alterada
 
 def apaga():
     '''
@@ -40,12 +42,20 @@ def apaga():
     if a variavel p nao é None(não encontrado) se foi encontrado delete da agenda na posição de pesquisar nome o nome do contato
     senao avise não encontrado
     '''
+    global agenda,alterada
     nome = pede_nome()
     p = pesquisa_nome(nome)
     if p is not None:
-        del agenda[p]
+            decisão = input('Deseja excluir esse contato? (Sim | Não) :').capitalize()
+            if decisão == 'Sim':
+                del agenda[p]
+                print(f'Contato apagado {nome}')
+                alterada = True
+            else:
+                print('Contato não excluido!')
     else:
         print('Não encontrado')
+    
 
 def altera():
     '''
@@ -67,22 +77,45 @@ def altera():
         nome = agenda[p][0]
         telefone = agenda[p][1]
         print('Encontrado')
-        mostra_dados(nome, telefone)
-        nome = pede_nome()
-        telefone = pede_telefone()
-        agenda[p] = [nome, telefone]
+        decisao = input('Deseja alterar? (Sim | Não): ').capitalize()
+        if decisao == 'Sim':
+            mostra_dados(nome, telefone)
+            nome = pede_nome()
+            telefone = pede_telefone()
+            agenda[p] = [nome, telefone]
+            alterada = True #agenda alterada
+        else:
+            print('NÃO ALTERADO!')
     else:
         print('Nome não encontradao')
 
 def lista():
+
+    '''
+    imprime o nome agenda
+    para i indice e x elemento em enumerate gerando uma tupla, ja que saõ dois valores (telefone e nome)
+    imprima a posicao do indice
+    chama mostra dados passa o nome e telefone da tupla
+    '''
     print('\Agenda\n\n------')
     for i, x in enumerate(agenda):
         print(f'Posição: {i}')
-        mostra_dados(x[0], x[1])
+        mostra_dados(i, x[0], x[1])
     print('------\n')
 
 def ler():
-    global agenda
+    '''
+    agenda é uma varivel de fora para acessar usamos global
+    variavel chama a funçao pedir o nome do arquivo
+
+    abertura de arquivo, tipo leitura
+    cria a lista de agenda vazia
+    Para cada linha do arquivo:
+    - Remove espaços extras. strip()
+    - Separa em nome e telefone usando o delimitador "#".split(#)
+    - Adiciona [nome, telefone] à lista agenda.
+    '''
+    global agenda, alterada
     nome_arquivo = pede_nome_arquivo()
     with open(nome_arquivo, 'r', encoding='UTF-8') as arquivo:
         agenda = []
@@ -90,11 +123,18 @@ def ler():
             nome, telefone = linha.strip().split('#')
             agenda.append([nome, telefone])
 
+        agenda.sort()
+        alterada = False
+        return agenda
+
+
 def grava():
+    global agenda,alterada
     nome_arquivo = pede_nome_arquivo()
     with open(nome_arquivo, 'w', encoding='utf-8') as arquivo:
         for i in agenda:
             arquivo.write(f'{i[0]}#{i[1]}\n')
+        alterada = False
 
 def tamanho_agenda():
     print(f'Tamanho da agenda: {len(agenda)}')
@@ -125,6 +165,11 @@ def menu():
     return valida_faixa('Escolha uma opção', 0, 7)
 while opcao:= menu():
     if opcao == 0:
+        if alterada:
+            decisao = input("Agenda foi modificada. Deseja salvar antes de sair? (Sim | Não): ").capitalize()
+            if decisao == "Sim":
+                grava()
+        print("Saindo...")
         break
     elif opcao == 1:
         novo()
