@@ -1,14 +1,34 @@
+from datetime import datetime
 agenda = []
 alterada = False
-def pede_nome():
-    return input('Nome: ')
 
-def pede_telefone():
-    return input('Telefone: ')
+def pede_nome(msg = 'Nome: '):
+    nome = input(msg)
 
+    if nome  == '':
+        return 'Vazio, preencha o espaço'
+    return nome
+
+def pede_telefone(numero= 'Telefone: '):
+    telefone = input(numero)
+    if telefone == '':
+        return 'Preencha com o numero: '
+
+    return telefone
+
+def data_aniversario(msg = 'Digite a data de aniversário: (dia/mês/ano)'):
+    data = input(msg)
+    try:
+        datetime.strptime(data, "%d/%m/%Y")
+        return data
+    except ValueError:
+        print('Digite uma data válida: dia/mes/ano')
+        return 'Data inválida'
 #para mostrar o que foi escrito em nome e telefone
-def mostra_dados(indice, nome, telefone):
-    print(f'Indice: {indice} | Nome: {nome} | Telefone: {telefone}')
+def mostra_dados(indice, nome, telefones, data_aniversario):
+    print(f'Indice: {indice} | Nome: {nome} | Data aniversario: {data_aniversario}')
+    for tipo, numero in telefones:
+        print(f"   {tipo}: {numero}")
 
 
 def pede_nome_arquivo():
@@ -21,8 +41,13 @@ def pesquisa_nome(nome):
         if b[0].lower() == onome: #compara o nome  armazenado b[indice] com a variavel que transformou em minusculo
             return a # se encontrar retorna o a posição do nome na lista
     return None # se não encontrar retorna None
-
 #b[0] é o nome armazenado no contado da agenda, b é o elemento da lista
+
+def pede_tipo(msg="Tipo (fixo/celular): "):
+    tipo = input(msg).strip().lower()
+    if tipo == "":
+        return "desconhecido"
+    return tipo
 
 def novo():
     '''
@@ -30,9 +55,27 @@ def novo():
     depois pego a lista vazia de agenda e adiciono o nome e telefone
     '''
     global agenda,alterada
+    
     nome = pede_nome()
-    telefone = pede_telefone()
-    agenda.append([nome, telefone])
+    '''
+    verificação se o nome já existe na agenda ele apresenta a mensagem.
+    '''
+    for nome_duplo in agenda: 
+        if nome_duplo[0] == nome:
+          print(f'{nome} já existe')
+          return
+          
+    telefones = []
+    while True:
+        tipo = input("Tipo de telefone (fixo/celular): ").strip().lower()
+        numero = pede_telefone()
+        telefones.append([tipo, numero])
+        
+        continuar = input("Deseja adicionar outro telefone? (s/n): ").strip().lower()
+        if continuar != "s":
+            break
+    aniversario = data_aniversario()
+    agenda.append([nome, telefones, aniversario])
     alterada = True # foi alterada
 
 def apaga():
@@ -116,16 +159,24 @@ def ler():
     - Adiciona [nome, telefone] à lista agenda.
     '''
     global agenda, alterada
-    nome_arquivo = pede_nome_arquivo()
-    with open(nome_arquivo, 'r', encoding='UTF-8') as arquivo:
-        agenda = []
-        for linha in arquivo.readlines():
-            nome, telefone = linha.strip().split('#')
-            agenda.append([nome, telefone])
+    try: 
+       
+        nome_arquivo = pede_nome_arquivo()
+        with open(nome_arquivo, 'r', encoding='UTF-8') as arquivo:
+            agenda = []
+            for linha in arquivo.readlines():
+                nome, telefone = linha.strip().split('#')
+                agenda.append([nome, telefone])
 
-        agenda.sort()
-        alterada = False
-        return agenda
+            agenda.sort()
+            alterada = False
+            
+            with open('agenda_lida.txt', 'r', encoding='utf-8') as agenda_atualizada:
+                agenda_atual = agenda_atualizada.read().strip()
+                return agenda_atual
+    except Exception as erro:
+        print(f'Ocorreu um erro ao ler arquivo {erro} ')
+
 
 
 def grava():
@@ -135,6 +186,7 @@ def grava():
         for i in agenda:
             arquivo.write(f'{i[0]}#{i[1]}\n')
         alterada = False
+    
 
 def tamanho_agenda():
     print(f'Tamanho da agenda: {len(agenda)}')
