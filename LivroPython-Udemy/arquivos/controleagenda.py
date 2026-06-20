@@ -142,8 +142,8 @@ def lista():
     '''
     print('\Agenda\n\n------')
     for i, x in enumerate(agenda):
-        print(f'Posição: {i}')
-        mostra_dados(i, x[0], x[1])
+        print(f'Contato: {i}')
+        mostra_dados(i, x[0], x[1], x[2])
     print('------\n')
 
 def ler():
@@ -175,7 +175,7 @@ def ler():
                 agenda_atual = agenda_atualizada.read().strip()
                 return agenda_atual
     except Exception as erro:
-        print(f'Ocorreu um erro ao ler arquivo {erro} ')
+        print(f'Ocorreu um erro ao ler arquivo')
 
 
 

@@ -15,15 +15,26 @@ class Conta:
         for cliente in self.clientes:
             print(f'Cliente: {cliente.nome} | Telefone: {cliente.telefone}')
     
+    #metodo para imprimir se é possivel sacar ou não
+    def verifica_saque(self,valor):
+        if self.saldo >= valor:
+            print('True, É POSSÍVEL SACAR!')
+        else:
+            print('False, NÃO É POSSIVEL SACAR!')
+            
     #permite retirar dinheiro
     def saque(self,valor):
+        
         if self.saldo >= valor:
             self.saldo -= valor
             self.operacoes.append(['SAQUE',valor])
+            self.verifica_saque(valor) #chamando o metodo dessa classe
+            #return True
+           
         else:
             self.operacoes.append(['SALDO INSUFICIENTE', valor])
-        
-        
+            #return False
+            self.verifica_saque(valor)
 
     #acrescenta ao valor do saldo
     def deposito(self,valor):
@@ -37,3 +48,29 @@ class Conta:
             print(f'{operacao[0]:10s} {operacao[1]:10.2f}')
 
         print(f'\n Saldo: {self.saldo:10.2f}\n')
+
+class ContaEspecial(Conta):
+    def __init__(self, clientes, numero, saldo =0, limite =0):
+        super().__init__(clientes, numero, saldo)
+        self.limite = limite
+    
+    def saque(self,valor):
+        if self.saldo + self.limite >= valor:
+            self.saldo -= valor
+            self.operacoes.append(['SAQUE', valor])
+            super().verifica_saque(valor)
+            #referencia a classe mãe
+        else:
+            self.operacoes.append(['Você não tem: ', valor])
+            super().verifica_saque(valor)
+            
+    #reescrita do metodo de verificação
+    def verifica_saque(self,valor):
+        resultado = super().verifica_saque(valor) #na variavel, chamei o metodo da classe mãe
+        return resultado
+    
+    #reescrita do metodo de extrato para exibir o limite e o saldo disponivel
+    def extrato(self):
+        super().extrato()#chamar o metodo la da classe conta
+        print(f'Seu Limite é de: {self.limite}') #imprimir
+        print(f'Total disponivel para saque: {self.saldo}')

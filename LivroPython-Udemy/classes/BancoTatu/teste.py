@@ -1,7 +1,8 @@
 #importar da classe clientes
 from clientes import Cliente
 from bancos import Banco
-from contas import Conta
+from contas import Conta, ContaEspecial
+
 
 #instancias da classe cliente
 marcos = Cliente('Marcos da Silva', '777-1234')
@@ -11,14 +12,13 @@ conta_dupla = Conta([marcos], '991-111')
 banco = Banco('Money')
 banco.abre_conta(ane)
 conta_dupla.deposito(500)
-banco.lista_contas()
+#banco.lista_contas()
 
 
 #somente uma conta
-conta1= Conta([ane],10 ,1000)
+conta1= ContaEspecial([ane],numero='10' ,saldo=1000, limite=1000)
 #(cliente, numero, deposito inicial)
-conta1.saque(60)
-conta1.resumo()
+conta1.saque(200)
 conta1.extrato()
 
 '''
