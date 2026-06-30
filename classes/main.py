@@ -28,8 +28,9 @@ class Menu():
             escolha_car = int(input('Escolha o numero do carro: '))
             self.carro_escolhido = carros_disponiveis[escolha_car - 1]
 
-            #chamar o menu de informaçoes do carro é a instancia do carro escolhido
+                #chamar o menu de informaçoes do carro é a instancia do carro escolhido
             self.carro_escolhido.mostrar_info_carros()
+            
             self.personaliza()
             comprar = input('Deseja comprar? Sim | Não: ').capitalize()
             if comprar == 'Sim':
@@ -60,6 +61,7 @@ class Menu():
                 print(f'Nome do cliente: {self.cliente}')
                 print(f'\n{self.carro_escolhido.mostrar_info_carros()}')
                 print(f'Pagamento: {self.carro_escolhido.pagamento}')
+
 
             
 

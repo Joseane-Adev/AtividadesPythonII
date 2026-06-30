@@ -5,6 +5,7 @@ class Carro():
         self.cor = cor
         self.cliente = cliente
         self.preco = preco
+        self.parcela = 0
      
      def personaliza(self):
           print('='*70)
@@ -20,8 +21,6 @@ class Carro():
           )
           return info
           
-
-
      def carroBoleto(self):
           self.personaliza
           entrada = int(input('Digite o valor da entrada para comprar o carro: '))
@@ -37,6 +36,7 @@ class Carro():
           meses = int(input('Escolha o numero que se refere aos meses quer pagar o carro?'))
           self.personaliza()
           if meses == 1:
+               
                pagamento = float(carro_entrada / 36)
                print(f'Você irá pagar pelo {self.modelo} R$:{pagamento:5.2f} em 36 meses')
           elif meses == 2:
@@ -61,7 +61,6 @@ class Carro():
                print(f'Saldo insuficiente falta: {self.preco - saldo}')
           self.personaliza()
      
-          
           
 
 
