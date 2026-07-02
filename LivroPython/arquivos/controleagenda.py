@@ -1,4 +1,6 @@
 from datetime import datetime
+import json
+from pathlib import Path
 agenda = []
 alterada = False
 
@@ -162,7 +164,7 @@ def ler():
     try: 
        
         nome_arquivo = pede_nome_arquivo()
-        with open(nome_arquivo, 'r', encoding='UTF-8') as arquivo:
+        with Path(nome_arquivo).open('r', encoding='UTF-8') as arquivo:
             agenda = []
             for linha in arquivo.readlines():
                 nome, telefone = linha.strip().split('#')
@@ -182,10 +184,8 @@ def ler():
 def grava():
     global agenda,alterada
     nome_arquivo = pede_nome_arquivo()
-    with open(nome_arquivo, 'w', encoding='utf-8') as arquivo:
-        for i in agenda:
-            arquivo.write(f'{i[0]}#{i[1]}\n')
-        alterada = False
+    with Path('agenda.json').open('w', encoding='utf-8') as arquivo:
+         json.dump(agenda, arquivo, ensure_ascii=False, indent=4)
     
 
 def tamanho_agenda():

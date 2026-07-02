@@ -6,12 +6,13 @@ class Carro():
         self.cliente = cliente
         self.preco = preco
         self.parcela = 0
+        self.pagamento = None
      
      def personaliza(self):
           print('='*70)
 
      def mostrar_info_carros(self):
-          titulo_info = 'Informaçoes'
+          titulo_info = 'Informaçoes do véiculo: '
           info = (
                   f"{titulo_info.center(45)}\n"
                   f"Modelo: {self.modelo}\n"
@@ -35,9 +36,10 @@ class Carro():
           print('[3]- 12 meses')
           meses = int(input('Escolha o numero que se refere aos meses quer pagar o carro?'))
           self.personaliza()
-          if meses == 1:
-               
+          if meses == 1: 
+               #pagamento é o valor da parcela
                pagamento = float(carro_entrada / 36)
+               self.parcela = pagamento
                print(f'Você irá pagar pelo {self.modelo} R$:{pagamento:5.2f} em 36 meses')
           elif meses == 2:
                pagamento = float(carro_entrada / 24 )
@@ -49,45 +51,21 @@ class Carro():
                print('Opção inválida')
           
 
-     def carroAvista(self):
+     def carroAvista(self, menu):
           self.personaliza()
           saldo = int(input(f'{self.cliente} qual o seu saldo: '))
-
-          if self.preco >= saldo:
-               print('É possível compra o carro')
-          elif self.preco <= saldo:
-               print(f'É possível comprar o carro e sobra:{saldo - self.preco} ')
+     
+          if saldo >= self.preco:
+               print(f'É possível compra o carro e sobra: {saldo - self.preco}')
+               self.pagamento = 'À vista'
           else:
                print(f'Saldo insuficiente falta: {self.preco - saldo}')
-          self.personaliza()
-     
+               
           
+     
 
 
-'''
-
-#para criar o contrato
-     def extrato_compra(self):
-          with open('arquivo_compra.txt', 'w' ,encoding='utf-8') as contrato:
-               contrato.write(coloque as aspas
-          <!DOCTYPE html>
-          <html lang= 'pt-BR>
-          <head>
-          <meta charset = 'utf-8'>
-          <title>Contrato</title>
-          </head>
-          <body>)coloque aspas
-               contrato.write(f'<h2>Contrato Concessionária Dream</h2>')
-               contrato.write(f'<p>Nome do cliente: </p> {self.cliente}')
-               contrato.write(f'<p>Informaçoes do carro: </p> {self.mostrar_info_carros()}')
-               contrato.write(f'Pagamento:')     
-               contrato.write('</body></html>')
-   
         
-
-
-
-'''
 
                
           
