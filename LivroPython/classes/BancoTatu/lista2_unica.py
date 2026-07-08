@@ -20,7 +20,7 @@ class ListaUnica(UserList):
             self.verifica_tipo(item)
             if item not in self.data:
                 super().append(item)#adiciona um por um
-                
+
     def verifica_tipo(self, item):
         if not isinstance(item,self.elemento_classe):
             raise TypeError('TIPO INVÁLIDO')
