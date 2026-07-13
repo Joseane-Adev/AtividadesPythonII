@@ -16,8 +16,7 @@ class Nome:
         print('__eq__Chamado')
         return self.nome == outro.nome
     
-    def __lt__(self, outro
-    ):
+    def __lt__(self, outro):
         print('__lt__ Chamado')
         return self.nome < outro
 
