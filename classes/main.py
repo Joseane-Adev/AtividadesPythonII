@@ -106,8 +106,8 @@ class Menu():
           <style>
                 body {{
                     font-family: Georgia, serif;
-                    background-color: #f4f4f9;
-                    color: #333;
+                    background-color: #1CA9C9;
+                    color: #444;
                     line-height: 1.6;
                     padding: 40px;
                 }}
