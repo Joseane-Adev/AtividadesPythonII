@@ -1,6 +1,7 @@
 from carro import Carro
 from validaçoes import Validacao
-
+import webbrowser
+import os
 class Menu():
     
     def personaliza(self):
@@ -18,7 +19,6 @@ class Menu():
             self.personaliza()
             titulo_car = 'Carros à venda!'
             print(titulo_car.center(45))
-            #alteração guardar em json
             carros_disponiveis = [
                     Carro("Fiat Uno", 2020, "Branco", self.cliente, 35000),
                     Carro("Chevrolet Onix", 2022, "Preto", self.cliente, 55000),
@@ -94,22 +94,61 @@ class Menu():
     
     #para criar o contrato
     def extrato_compra(self):
-          with open('arquivo_compra.html', 'w' ,encoding='utf-8') as contrato:
-               contrato.write('''
+        
+          contrato_arquivo = 'contrato_arquivo.html'
+          with open(contrato_arquivo, 'w' ,encoding='utf-8') as contrato:
+               contrato.write(f'''
           <!DOCTYPE html>
           <html lang= 'pt-BR'>
           <head>
           <meta charset = 'utf-8'>
           <title>Contrato</title>
+          <style>
+                body {{
+                    font-family: Georgia, serif;
+                    background-color: #f4f4f9;
+                    color: #333;
+                    line-height: 1.6;
+                    padding: 40px;
+                }}
+                .container {{
+                    background: #fff;
+                    padding: 30px;
+                    border-radius: 8px;
+                    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+                    max-width: 800px;
+                    margin: auto;
+                }}
+                h2 {{
+                    text-align: center;
+                    color: #444;
+                }}
+                .destaque {{
+                    font-weight: bold;
+                    color: #222;
+                }}
+                .info {{
+                    margin-top: 20px;
+                }}
+            </style>
           </head>
-          <body>''')
-               contrato.write(f'<h2> Contrato Concessionária Dream </h2>')
-               contrato.write(f'<p>Nome do cliente: </p> : {self.cliente}')
-               contrato.write(f'<p>Informaçoes do carro: </p>{self.carro_escolhido.mostrar_info_carros()}')
-               contrato.write(f'<p>Parcelas:{self.carro_escolhido.parcela:.2f}') 
-               contrato.write(f'<p>Tipo de pagamento</p>: {self.carro_escolhido.pagamento}')
-               contrato.write('</body></html>')
-
+          <body>
+          <div class="container">
+                <h2>Contrato Concessionária Dream</h2>
+                <p><span class="destaque">Nome do cliente:</span> {self.cliente}</p>
+                <div class="info">
+                    <p><span class="destaque">Informações do carro:</span><br>{self.carro_escolhido.mostrar_info_carros().replace("\n","<br>")}</p>
+                    <p><span class="destaque">Parcelas:</span> {self.carro_escolhido.parcela:.2f}</p>
+                    <p><span class="destaque">Tipo de pagamento:</span> {self.carro_escolhido.pagamento}</p>
+                </div>
+            </div>
+        </body>
+        </html>
+        ''')
+               os.startfile(contrato_arquivo)
+         
+          
+                
 
             
 

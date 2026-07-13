@@ -12,9 +12,7 @@ class Carro():
           print('='*70)
 
      def mostrar_info_carros(self):
-          titulo_info = 'Informaçoes do véiculo: '
           info = (
-                  f"{titulo_info.center(45)}\n"
                   f"Modelo: {self.modelo}\n"
                   f"Ano: {self.ano}\n"
                   f"Cor: {self.cor}\n"
