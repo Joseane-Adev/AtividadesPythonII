@@ -9,7 +9,7 @@ class Pessoa:
         return Pessoa.ano_atual - self.idade
 dados = {'nome': 'Ana', 'idade':32} #dicionario
 p1 = Pessoa(**dados) #desempacotamento do dicionario
-p2 = ('Helena', 12)
+p2 = ('Helena',12)
 #p1.__dict__['nome'] = 'Alves'
 print(p1.__dict__) #mostra o dicionario
 print(vars(p1)) #mostra o dicionario
