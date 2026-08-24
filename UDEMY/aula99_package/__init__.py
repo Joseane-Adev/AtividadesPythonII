@@ -1,0 +1,1 @@
+print('importou,',__name__)
